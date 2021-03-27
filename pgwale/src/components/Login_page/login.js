@@ -34,7 +34,7 @@ export default function SignIn() {
   // ---------check if login---------
   useEffect(() => {
     if (sessionStorage.getItem("login")) {
-      //history.push("/");
+      history.push("/");
     }
     // eslint-disable-next-line
   }, []);
@@ -54,13 +54,13 @@ export default function SignIn() {
           api
             .post("/api/signin", user)
             .then((res) => {
-              console.log(res);
+              //console.log(res);
               sessionStorage.setItem("login", true);
-              console.log(sessionStorage.getItem("login"));
-              // history.push("/");
+              //console.log(sessionStorage.getItem("login"));
+              history.push("/");
             })
             .catch((err) => {
-              console.log(err.response.status);
+              //console.log(err.response.status);
               if (err.response.status === 422) {
                 alert(err.response.data.errors.error);
               }

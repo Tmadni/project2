@@ -37,20 +37,19 @@ Route::post('/forgot-password', function (Request $request) {
     );
 
     return $status === Password::RESET_LINK_SENT
-                ? response()->json(['status' => __($status)])
-                : response()->json(['email' => __($status)]);
+                ? response()->json(['message' => __($status)])
+                : response()->json(['message' => __($status)]);
 })->middleware('guest')->name('password.email')->withoutMiddleware([\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class]);
 
-// Route::get('/reset-password/{token}', function ($token) {
-//     return view('auth.reset-password', ['token' => $token]);
-// })->middleware('guest')->name('password.reset');
+
 
 Route::post('/reset-password', function (Request $request) {
-    $request->validate([
+    $validator=$request->validate([
         'token' => 'required',
         'email' => 'required|email',
-        'password' => 'required|min:8|confirmed',
+        'password' => 'required|confirmed',
     ]);
+
 
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
@@ -58,7 +57,6 @@ Route::post('/reset-password', function (Request $request) {
             $user->forceFill([
                 'password' => Hash::make($password)
             ])->setRememberToken(Str::random(60));
-
             $user->save();
 
             event(new PasswordReset($user));
@@ -66,8 +64,8 @@ Route::post('/reset-password', function (Request $request) {
     );
 
     return $status == Password::PASSWORD_RESET
-                ? redirect()->route('login')->with('status', __($status))
-                : response()->json(['email' => [__($status)]]);
+                ? response()->json(['message' => __($status)])
+                : response()->json(['message' => __($status)]);
 })->middleware('guest')->name('password.update')->withoutMiddleware([\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class]);
 
 

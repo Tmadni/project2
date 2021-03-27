@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./safety.css";
 import Images from "./carousel-img";
 import { Container, Row } from "react-bootstrap";
-import Aos from "aos";
-import "aos/dist/aos.css";
 
 function Safety() {
   const list = [
@@ -16,11 +14,6 @@ function Safety() {
     "Covid_Icons-Frontline_Ecosystem-01_Mandatory_PPE_for_Staff_2x",
     "ICONS_ROOM_FEATURES_03_Storage_Space_2x",
   ];
-  useEffect(() => {
-    Aos.init({
-      duration: 1500,
-    });
-  }, []);
 
   return (
     <Container className="top" data-aos="flip-right">

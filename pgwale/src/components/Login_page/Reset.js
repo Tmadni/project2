@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Button,
@@ -46,26 +46,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function Reset(props) {
   const history = useHistory();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(props.match.params.email);
   const [password, setPassword] = useState("");
   const [password_confirmation, setPassword_confirmation] = useState("");
   const classes = useStyles();
+  useEffect(() => {
+    if (sessionStorage.getItem("login")) {
+      history.push("/");
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const Reset = (e) => {
     e.preventDefault();
-    let user = { email, password, password_confirmation };
+    const user = {
+      token: props.match.params.token,
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
+    };
     axios
-      .post("http://localhost:8000/api/reset-password", { user })
+      .post("http://localhost:8000/api/reset-password", user)
       .then((res) => {
+        alert(res.data.message);
+        history.push("/signin");
         console.log(res);
       })
       .catch((err) => {
+        alert("confirmed password does not match");
         console.log(err);
+        console.log(err.message);
       });
-
-    //history.push("/login");
   };
 
   return (
@@ -99,9 +112,10 @@ export default function SignIn() {
             fullWidth
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            id="password"
-            label="Enter New Password"
             name="password"
+            label="Enter New Password"
+            id="password"
+            type="password"
             autoComplete="password"
             autoFocus
           />
@@ -116,6 +130,7 @@ export default function SignIn() {
             label="Confirm Password"
             name="password_confirmation"
             autoComplete="password_confirmation"
+            type="password"
             autoFocus
           />
           <Button

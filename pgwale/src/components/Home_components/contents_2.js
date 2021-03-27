@@ -1,15 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Aos from "aos";
-import "aos/dist/aos.css";
 import "./contents.css";
 export default function Contents_2() {
-  useEffect(() => {
-    Aos.init({
-      duration: 1000,
-      offset: 300,
-    });
-  }, []);
   return (
     <Container>
       <Row>

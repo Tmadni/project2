@@ -15,7 +15,7 @@ import {
 } from "react-bootstrap";
 const NavbarD = () => {
   const history = useHistory();
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState("");
   //eslint-disable-next-line
   useEffect(() => {
     if (sessionStorage.getItem("login")) {
@@ -24,6 +24,7 @@ const NavbarD = () => {
       setStatus(false);
     }
   }, []);
+  console.log(status);
 
   const logout = (e) => {
     api

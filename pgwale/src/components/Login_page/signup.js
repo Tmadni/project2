@@ -57,7 +57,7 @@ export default function SignUp() {
   // ---------check if login---------
   useEffect(() => {
     if (sessionStorage.getItem("login")) {
-      //history.push("/");
+      history.push("/");
     }
     // eslint-disable-next-line
   }, []);
@@ -73,9 +73,9 @@ export default function SignUp() {
           api
             .post("/api/signup", detail)
             .then((res) => {
-              console.log(res);
+              //console.log(res);
               sessionStorage.setItem("login", true);
-              // history.push("/");
+              history.push("/");
             })
             .catch((err) => {
               console.log(err);

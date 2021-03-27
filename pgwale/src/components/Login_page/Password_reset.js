@@ -56,13 +56,13 @@ export default function SignIn() {
     axios
       .post("http://localhost:8000/api/forgot-password", { email })
       .then((res) => {
-        console.log(res);
+        alert(res.data.message);
+        console.log(res.data.message);
+        history.push("/");
       })
       .catch((err) => {
         console.log(err);
       });
-
-    //history.push("/login");
   };
 
   return (

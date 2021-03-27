@@ -1,0 +1,6 @@
+{
+    "beautify.config": "true",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true
+}

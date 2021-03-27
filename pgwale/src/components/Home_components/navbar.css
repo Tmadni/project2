@@ -1,0 +1,20 @@
+/* Navbar */
+.container-fluid {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+.navbar {
+  background-color: #fff !important;
+} /* .navbar-brand,
+.nav-link {
+  color: white !important;
+} */
+/* .nav-bar {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+} */
+.book {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
